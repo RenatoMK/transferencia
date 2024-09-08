@@ -1,0 +1,39 @@
+# Configurações de Ambiente (environment variables)
+env:
+  - name: SPRING_PROFILES_ACTIVE    
+    value: dev
+  - name: DATABASE_DRIVER    
+    value: org.h2.Driver               
+  - name: DATABASE_URL
+    value: jdbc:h2:mem:testdb
+  - name: DATABASE_USERNAME
+    value: sa
+  - name: DATABASE_PASSWORD
+    value: 
+  - name: DATABASE_CONSOLE_ENABLED
+    value: true
+  - name: DATABASE_PATH
+    value: /h2-console
+  - name: SWAGGER_ATIVAR
+    value: true
+  - name: CLIENTE_API
+    value: http://localhost:9090/clientes/
+  - name: CONTA_API
+    value: http://localhost:9090/contas/
+  - name: NOTIFICACAO_API
+    value: http://localhost:9090/notificacoes
+
+# Configuração de Liveness e Readiness Probes
+livenessProbe:
+  httpGet:
+    path: /actuator/health          
+    port: 8080
+  initialDelaySeconds: 30           
+  periodSeconds: 10                 
+
+readinessProbe:
+  httpGet:
+    path: /operacoes/v1/actuator/health
+    port: 8080
+  initialDelaySeconds: 10
+  periodSeconds: 5
