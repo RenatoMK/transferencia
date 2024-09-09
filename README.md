@@ -1,4 +1,4 @@
-# Execução do App Transferencia  
+# Execução do App Transferência  
   
   
 Colocar as variáveis de ambiente no projeto, pois elas não são necessárias para a execução do app.
@@ -13,3 +13,11 @@ SWAGGER_ATIVAR=true
 CLIENTE_API=http://localhost:9090/clientes/  
 CONTA_API=http://localhost:9090/contas/  
 NOTIFICACAO_API=http://localhost:9090/notificacoes  
+  
+Executar através de uma IDE.
+
+# Execução do App Transferência via Docker  
+
+Na raiz do projeto executar o comando abaixo para iniciar o container do app Transferência e do Wiremock. 
+
+`docker-compose up --build -d`
