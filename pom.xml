@@ -13,6 +13,7 @@
 	<version>0.0.1</version>
 	<name>api-transferencia</name>
 	<description>Desafio Itau</description>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -77,6 +78,12 @@
 		    <groupId>com.zaxxer</groupId>
 		    <artifactId>HikariCP</artifactId>
 		    <version>5.0.1</version> 
+		</dependency>
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.24</version> <!-- Verifique a versão mais recente -->
+		    <scope>provided</scope>
 		</dependency>
 		<dependency>
 		    <groupId>org.springdoc</groupId>

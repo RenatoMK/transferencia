@@ -1,14 +1,14 @@
-# Usar a imagem base do WireMock
-FROM rodolpheche/wiremock:2.30.1
+# Usar a imagem base
+FROM openjdk:17-jdk-alpine
 
-# Criar o diretório de mapeamentos (caso não exista)
-RUN mkdir -p /home/wiremock/mappings
+# Definindo o diretório de trabalh
+WORKDIR /app
 
-# Copiar os mapeamentos locais para o container
-COPY ./wiremock/mappings /home/wiremock/mappings
+# Copiando o JAR da aplicação para o container
+COPY target/api-transferencia.jar /app/api-transferencia.jar
 
-# Expor a porta 8080 (padrão do WireMock)
+# Expor a porta 8080
 EXPOSE 8080
 
-# Comando de inicialização
-CMD ["--verbose"]
+# Definindo o comando de inicialização
+CMD ["java", "-jar", "api-transferencia.jar"]
