@@ -1,4 +1,4 @@
-# transferencia
+# Execução do App Transferencia
 
 DATABASE_URL=jdbc:h2:mem:testdb  
 DATABASE_DRIVER=org.h2.Driver  
