@@ -16,7 +16,7 @@ import com.desafioitau.api.transferencia.exception.BusinessNotFoundException;
 import com.desafioitau.api.transferencia.service.ContaService;
 
 @Service
-public class ContaServiveImpl implements ContaService {
+public class ContaServiceImpl implements ContaService {
 
 	private RestTemplate restTemplate = new RestTemplate();
 	

@@ -1,5 +1,8 @@
 package com.desafioitau.api.transferencia.service.impl;
 
+import java.sql.Timestamp;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -13,8 +16,12 @@ import org.springframework.web.client.RestTemplate;
 
 import com.desafioitau.api.transferencia.dto.ClienteResponseDTO;
 import com.desafioitau.api.transferencia.dto.NotificacaoRequestDTO;
+import com.desafioitau.api.transferencia.entity.Transacao;
 import com.desafioitau.api.transferencia.exception.BusinessNotFoundException;
+import com.desafioitau.api.transferencia.repository.TransacaoReprosity;
 import com.desafioitau.api.transferencia.service.NotificacaoService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,11 +34,14 @@ public class NotificacaoServiceImpl implements NotificacaoService {
     
     @Autowired
     private RetryTemplate retryTemplate;
+    
+    @Autowired
+    private TransacaoReprosity transacaoReprosity;
 
     @Value("${external.api.notificacao}")
     private String urlnotificacao;
 
-    public void notificaBacen(NotificacaoRequestDTO notificacaoRequestDTO) {
+    public void notificaBacen(NotificacaoRequestDTO notificacaoRequestDTO, UUID uuid) {
         HttpHeaders httpHeaders = new HttpHeaders();
         HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders);
         try {
@@ -41,14 +51,19 @@ public class NotificacaoServiceImpl implements NotificacaoService {
 				return null;
 			});
         } catch (RestClientException e) {
-            // Isso captura erros como "Connection refused"
-            log.error("Erro ao conectar com o BACEN: {}", e.getMessage());
-            throw new BusinessNotFoundException("Falha ao tentar notificar o BACEN: " + e.getMessage());
+            Transacao transacao = new Transacao();
+            transacao.setDataHoraAtualizacao(new Timestamp(System.currentTimeMillis()));
+            transacao.setDataHoraCriacao(new Timestamp(System.currentTimeMillis()));
+            try {
+				transacao.setDescricaoCorpoMensagem(new ObjectMapper().writeValueAsString(notificacaoRequestDTO));
+			} catch (JsonProcessingException e1) {
+				log.info("Erro ao grava na base de dados " + uuid);
+				e1.printStackTrace();
+			}
+            transacao.setStatusEnvio("PENDENTE");
+            transacao.setUuidTransacao(uuid);
+            transacaoReprosity.save(transacao);
+            throw new BusinessNotFoundException("Falha ao tentar notificar o BACEN, Em breve ele será notificado");
         }
-    }
-
-    public void fallbackNotificaBacen(NotificacaoRequestDTO notificacaoRequestDTO, Throwable t) {
-        log.error("Fallback ativado. Erro ao tentar notificar o BACEN: {}", t.getMessage());
-        throw new BusinessNotFoundException("Operação realizada, mas falhamos em notificar o BACEN após várias tentativas.");
     }
 }

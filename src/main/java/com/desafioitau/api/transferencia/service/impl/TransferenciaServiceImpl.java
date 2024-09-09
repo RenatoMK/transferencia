@@ -49,7 +49,7 @@ public class TransferenciaServiceImpl implements TransferenciaService{
 		log.info("atualizaSaldo");
 		contaService.atualizaSaldo(notificacaoRequestDTO);
 		log.info("notificaBacen");
-		notificacaoService.notificaBacen(notificacaoRequestDTO);
+		notificacaoService.notificaBacen(notificacaoRequestDTO, uuid);
 		
 	}
 	
