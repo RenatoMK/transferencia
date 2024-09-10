@@ -1,6 +1,6 @@
 # Execução do App Transferência  
   
-  
+Executar através de uma IDE.  
 Colocar as variáveis de ambiente no projeto, pois elas são necessárias para a execução do app.
 
 DATABASE_URL=jdbc:h2:mem:testdb  
@@ -14,7 +14,6 @@ CLIENTE_API=http://localhost:9090/clientes/
 CONTA_API=http://localhost:9090/contas/  
 NOTIFICACAO_API=http://localhost:9090/notificacoes  
   
-Executar através de uma IDE.
 
 # Execução do App Transferência via Docker  
 
