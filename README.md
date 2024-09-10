@@ -21,3 +21,5 @@ Executar através de uma IDE.
 Na raiz do projeto executar o comando abaixo para iniciar o container do app Transferência e do Wiremock. 
 
 `docker-compose up --build -d`
+
+Importante: Caso necessário alterar o valor das variáveis CLIENTE_API, CONTA_API, NOTIFICACAO_API conforme a sua configuração do DockerTools.
