@@ -1,7 +1,7 @@
 # Execução do App Transferência  
   
   
-Colocar as variáveis de ambiente no projeto, pois elas não são necessárias para a execução do app.
+Colocar as variáveis de ambiente no projeto, pois elas são necessárias para a execução do app.
 
 DATABASE_URL=jdbc:h2:mem:testdb  
 DATABASE_DRIVER=org.h2.Driver  
