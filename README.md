@@ -1,6 +1,7 @@
 # Execução do App Transferência  
   
-Executar através de uma IDE.  
+### Executar através de uma IDE.  
+
 Colocar as variáveis de ambiente no projeto, pois elas são necessárias para a execução do app.
 
 DATABASE_URL=jdbc:h2:mem:testdb  
@@ -15,7 +16,7 @@ CONTA_API=http://localhost:9090/contas/
 NOTIFICACAO_API=http://localhost:9090/notificacoes  
   
 
-# Execução do App Transferência via Docker  
+### Execução do App Transferência via Docker  
 
 Na raiz do projeto executar o comando abaixo para iniciar o container do app Transferência e do Wiremock. 
 
