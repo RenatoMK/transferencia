@@ -16,7 +16,7 @@ CONTA_API=http://localhost:9090/contas/
 NOTIFICACAO_API=http://localhost:9090/notificacoes  
   
 
-### Execução do App Transferência via Docker  
+### Execução via Docker  
 
 Na raiz do projeto executar o comando abaixo para iniciar o container do app Transferência e do Wiremock. 
 
